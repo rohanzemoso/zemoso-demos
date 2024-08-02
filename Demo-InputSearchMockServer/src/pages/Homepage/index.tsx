@@ -14,28 +14,33 @@ type User = {
   name: string;
 };
 
+const fetchUsers = async (searchQuery: string): Promise<User[]> => {
+  try {
+    const response = await axios.get('http://localhost:5000/users');
+    return response.data.filter((user: User) =>
+      user.name.toLowerCase().startsWith(searchQuery.toLowerCase())
+    );
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    return [];
+  }
+};
+
 const Home: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/users');
-        const filteredUsers = response.data.filter((user: User) =>
-          user.name.toLowerCase().startsWith(searchQuery.toLowerCase())
-        );
+    const getUsers = async () => {
+      if (searchQuery) {
+        const filteredUsers = await fetchUsers(searchQuery);
         setUsers(filteredUsers);
-      } catch (error) {
-        console.error('Error fetching users:', error);
+      } else {
+        setUsers([]);
       }
     };
 
-    if (searchQuery) {
-      fetchUsers();
-    } else {
-      setUsers([]);
-    }
+    getUsers();
   }, [searchQuery]);
 
   return (

@@ -1,13 +1,11 @@
-import { Box } from "@mui/material";
+import { Box, styled } from "@mui/material";
 import React from "react";
-import IconAtom from "../../atoms/Icon";
-import TypographyMolecule from "../TypograpyMolecule";
-import { styled } from "@mui/system";
-import TypographyAtom from "../../atoms/Typography";
 import { theme } from "../../../theme/theme";
 import StarIconAtom from "../../atoms/StarIcon";
+import TypographyAtom from "../../atoms/Typography";
+import IconTypographyPair from "../../molecules/IconTypographyPair";
 
-interface TypographyIcon_Props {
+interface TradeRow_Props {
   src: string;
   name: string;
   subtitle: string;
@@ -18,16 +16,18 @@ interface TypographyIcon_Props {
   onWatchToggle: () => void;
 }
 
-const StyledBox = styled(Box)(() => ({
-  width: "1100px",
-  height: "74px",
+const StyledBox = styled(Box)(({ theme }) => ({
+  width: theme.spacing(137.5),
+  height: theme.spacing(18.5),
   display: "grid",
-  gridTemplateColumns: "300px 250px 200px 200px 100px",
+  gridTemplateColumns: `${theme.spacing(37.5)} ${theme.spacing(
+    31.25
+  )} ${theme.spacing(25)} ${theme.spacing(25)} ${theme.spacing(12.5)}`,
   alignItems: "center",
   backgroundColor: theme.palette.primary.main,
   border: "1px solid rgba(232, 232, 247, 1)",
-  marginBottom: "5px",
-  padding: "0 20px",
+  marginBottom: theme.spacing(1),
+  padding: `0 ${theme.spacing(2)}`,
 }));
 
 const StarBox = styled(Box)(() => ({
@@ -36,20 +36,13 @@ const StarBox = styled(Box)(() => ({
   width: "100%",
 }));
 
-const StyledIconTypographyBox = styled(Box)(() => ({
-  display: "flex",
-  gap: "1rem",
-  alignItems: "center",
-}));
-
-export const TypographyIcon: React.FC<TypographyIcon_Props> = ({
-  ...props
-}) => (
+export const TradeRow: React.FC<TradeRow_Props> = ({ ...props }) => (
   <StyledBox>
-    <StyledIconTypographyBox>
-      <IconAtom src={props.src} />
-      <TypographyMolecule name={props.name} subtitle={props.subtitle} />
-    </StyledIconTypographyBox>
+    <IconTypographyPair
+      src={props.src}
+      name={props.name}
+      subtitle={props.subtitle}
+    />
     <TypographyAtom>{props.price}</TypographyAtom>
     <TypographyAtom
       color={

@@ -5,13 +5,13 @@ import TypographyAtom from "../../atoms/Typography";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
-const StyledBox = styled(Box)(() => ({
+const StyledBox = styled(Box)(({ theme }) => ({
   width: "100%",
   height: "42px",
   display: "grid",
   gridTemplateColumns: "300px 250px 200px 200px 100px",
   alignItems: "center",
-  padding: "0 20px",
+  padding: `0 ${theme.spacing(2)}`,
   borderBottom: "1px solid rgba(232, 232, 247, 1)",
 }));
 
@@ -19,9 +19,9 @@ const StyledTypography = styled(TypographyAtom)(({ theme }) => ({
   textAlign: "left",
   display: "flex",
   alignItems: "center",
-  gap: "4px",
+  gap: theme.spacing(0.5),
   "&.watch-margin": {
-    marginLeft: "2rem",
+    marginLeft: theme.spacing(4),
   },
 }));
 

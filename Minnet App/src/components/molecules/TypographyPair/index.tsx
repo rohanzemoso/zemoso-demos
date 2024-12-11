@@ -3,14 +3,12 @@ import React from "react";
 import TypographyAtom from "../../atoms/Typography";
 import { theme } from "../../../theme/theme";
 
-interface TypographyMolecule_Props {
+interface TypographyPair_Props {
   name: string;
   subtitle: string;
 }
 
-const TypographyMolecule: React.FC<TypographyMolecule_Props> = ({
-  ...props
-}) => {
+const TypographyPair: React.FC<TypographyPair_Props> = ({ ...props }) => {
   return (
     <Box>
       <TypographyAtom>{props.name}</TypographyAtom>
@@ -21,4 +19,4 @@ const TypographyMolecule: React.FC<TypographyMolecule_Props> = ({
   );
 };
 
-export default TypographyMolecule;
+export default TypographyPair;

@@ -2,15 +2,15 @@ import { Box, styled } from "@mui/material";
 import React, { useState } from "react";
 import { rows } from "../../../utils/constants";
 import Header from "../../molecules/Header";
-import { TypographyIcon } from "../../molecules/TypographyIcon";
-import TabsAtom from "../../atoms/TabsAtom";
-import { theme } from "../../../theme/theme";
-
-const StyledBox = styled(Box)(() => ({
+import { TradeRow } from "../../molecules/TradeRow";
+import TabsMolecule from "../../molecules/TabsMolecule";
+const StyledBox = styled(Box)(({ theme }) => ({
   height: "804px",
   width: "1200px",
   backgroundColor: theme.palette.background.default,
+  padding: theme.spacing(2),
 }));
+
 const AssetRows = () => {
   const [watchedItems, setWatchedItems] = useState<Set<string>>(new Set());
   const [tabValue, setTabValue] = useState(0);
@@ -36,10 +36,10 @@ const AssetRows = () => {
 
   return (
     <StyledBox>
-      <TabsAtom value={tabValue} onChange={handleTabChange} />
+      <TabsMolecule value={tabValue} onChange={handleTabChange} />
       <Header />
       {displayRows.map((item, index) => (
-        <TypographyIcon
+        <TradeRow
           key={index}
           name={item.name}
           src={item.icon}

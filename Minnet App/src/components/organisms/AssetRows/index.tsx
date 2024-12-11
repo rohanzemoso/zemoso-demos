@@ -1,9 +1,10 @@
 import { Box, styled } from "@mui/material";
 import React, { useState } from "react";
-import { rows } from "../../../utils/constants";
+import { assetRows } from "../../../utils/constants";
 import Header from "../../molecules/Header";
 import { TradeRow } from "../../molecules/TradeRow";
 import TabsMolecule from "../../molecules/TabsMolecule";
+
 const StyledBox = styled(Box)(({ theme }) => ({
   height: "804px",
   width: "1200px",
@@ -32,15 +33,17 @@ const AssetRows = () => {
   };
 
   const displayRows =
-    tabValue === 1 ? rows.filter((item) => watchedItems.has(item.name)) : rows;
+    tabValue === 1
+      ? assetRows.filter((item) => watchedItems.has(item.name))
+      : assetRows;
 
   return (
     <StyledBox>
       <TabsMolecule value={tabValue} onChange={handleTabChange} />
       <Header />
-      {displayRows.map((item, index) => (
+      {displayRows.map((item) => (
         <TradeRow
-          key={index}
+          key={item.id}
           name={item.name}
           src={item.icon}
           subtitle={item.subtitle}
